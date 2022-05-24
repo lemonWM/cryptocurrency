@@ -18,6 +18,7 @@
             const user = reactive({
                 name: 'john'
             });
+            
             const store = useStore()
             const getCount = computed(() => store.state.count)
 
