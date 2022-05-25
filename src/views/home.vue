@@ -1,7 +1,7 @@
 <script setup>
-    import Test from '../components/test.vue'
+    import List from '../components/modules/home/items_list.vue'
 </script>
 
 <template>
-  <Test />
+  <List />
 </template>

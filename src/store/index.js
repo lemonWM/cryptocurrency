@@ -4,13 +4,13 @@ import { createStore } from 'vuex'
 const store = createStore({
     state() {
         return {
-            count: 0
+            currencyList: []
         }
     },
     mutations: {
-        increment(state, payload) {
+        updateList(state, payload) {
 
-            state.count += payload
+            state.currencyList = payload
         }
     }
 })

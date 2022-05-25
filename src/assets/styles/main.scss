@@ -1,0 +1,58 @@
+/* globals && details */
+button {
+    border: none;
+    background-color: transparent;
+}
+.container {
+    max-width: 1190px;
+    margin: 0 auto;
+    padding: 0px 15px;
+}
+
+.d-flex {
+    display: flex;
+}
+.d-row {
+    flex-direction: row;
+}
+.d-col {
+    flex-direction: column;
+}
+
+/* modules */
+
+.currency-list {
+    
+    .ant-card-grid {
+        background: #191f38;
+        color: white;
+    }
+    .ant-card-grid:hover {
+        background-color: #1890ff;
+        transform: scale(.98);
+        -webkit-transform: scale(.98);
+        -moz-transform: scale(.98);
+        -ms-transform: scale(.98);
+        -o-transform: scale(.98);
+
+        & a {
+            color: white;
+        }
+    }
+
+    .currency-item {
+
+        &__header {
+            align-items: baseline;
+            justify-content: space-between;
+
+            button {
+                cursor: pointer;
+            }
+        }
+
+        &__details {
+            align-items: flex-start;
+        }
+    }
+}
