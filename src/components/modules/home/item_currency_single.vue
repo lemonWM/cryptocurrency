@@ -61,13 +61,14 @@
                 
                 if(state.period == 'y'){
 
-                    getCurrentDetails()
+                    getCurrentDetailsY()
                 }
                 else if(state.period == 'd') {
                     
+                    getCurrentDetailsD()
                 }
                 else {
-                    
+                    getCurrentDetailsH()
                 }
 
             }
@@ -85,7 +86,7 @@
                 })
             }
 
-            const getCurrentDetails = function(){
+            const getCurrentDetailsY = function(){
                 
                 axios.get(`https://api.coincap.io/v2/assets/${currencySingle}/history?interval=d1`)
                 .then(response => {  
@@ -96,14 +97,49 @@
 
                     state.currencyDetails = arr
 
-                    chartData();
+                    chartData('myChart');
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+            };
+
+            const getCurrentDetailsD = function(){
+
+                axios.get(`https://api.coincap.io/v2/assets/${currencySingle}/history?interval=h1`)
+                .then(response => {  
+                    
+                    let arr = []
+
+                    arr = response.data.data
+
+                    state.currencyDetails = arr
+
+                    chartData('myChart2');
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+            }
+            const getCurrentDetailsH = function(){
+
+                axios.get(`https://api.coincap.io/v2/assets/${currencySingle}/history?interval=m1`)
+                .then(response => {  
+                    
+                    let arr = []
+
+                    arr = response.data.data
+
+                    state.currencyDetails = arr
+
+                    chartData('myChart3');
                 })
                 .catch(e => {
                     console.log(e);
                 })
             }
 
-            const chartData = function() {
+            const chartData = function(chart) {
 
                 state.currencyValues = []
                 state.currencyDates = []
@@ -124,7 +160,7 @@
                 if (myChart != null) {
                     myChart.destroy()
                 }
-                const ctx = document.getElementById('myChart');
+                const ctx = document.getElementById(`${chart}`);
 
                 myChart = new Chart(ctx, {
                 type: 'line',
@@ -173,14 +209,14 @@
                         padding: 0
                     }
                 }
-            });  
+            });
         } 
             
-         onMounted(() => {
+        onMounted(() => {
                 
             getCurrent();
-            getCurrentDetails();
-                
+            getCurrentDetailsY();
+            
         });
 
         return {
