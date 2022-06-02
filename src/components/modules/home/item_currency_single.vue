@@ -79,7 +79,7 @@
                 .then(response => {  
                     
                     state.currency = response.data.data
-                    state.currency.priceUsd = parseInt(state.currency.priceUsd)
+                    state.currency.priceUsd = parseInt( state.currency.priceUsd )
                 })
                 .catch(e => {
                     console.log(e);

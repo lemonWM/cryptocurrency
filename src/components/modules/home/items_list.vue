@@ -1,6 +1,10 @@
 <template>
 
-    <div class="currency-list container">
+    <div v-if="state.loaded" class="preloader-home d-flex">
+        <a-spin></a-spin>
+    </div>
+
+    <div v-else class="currency-list container">
         <a-card title="Card Title">
 
             <a-card-grid v-for="item in getCount" :key="item.id" style="width: 33.3333%; text-align: center">
@@ -24,7 +28,7 @@
 </template>
 
 <script>
-    import { computed, onMounted } from 'vue'
+    import { computed, onMounted, reactive } from 'vue'
     import { useStore } from 'vuex'
     import axios from 'axios'
   
@@ -36,6 +40,9 @@
             const store = useStore()
             const getCount = computed(() => store.state.currencyList)
           
+            const state = reactive({
+                loaded: true
+            })
 
             function changeStore(data) {
 
@@ -48,7 +55,7 @@
                 .then(response => {  
                     
                     changeStore(response.data.data)
-
+                    state.loaded = false
                     // dodać filtrowanie po store.currencyList
                 })
                 .catch(e => {
@@ -56,9 +63,8 @@
                 })
             });
 
-
             return {
-                getCount, changeStore
+                getCount, changeStore, state
             }
         },
 
