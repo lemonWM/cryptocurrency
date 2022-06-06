@@ -5,9 +5,10 @@
     </div>
 
     <div v-else class="currency-list container">
+
         <a-card title="Card Title">
 
-            <a-card-grid v-for="item in getCount" :key="item.id" style="width: 33.3333%; text-align: center">
+            <a-card-grid v-for="item in state.currencyItems" :key="item.id" style="width: 33.3333%; text-align: center">
                 
                 <div class="currency-item">
                     <div class="currency-item__header d-flex d-row">
@@ -28,7 +29,7 @@
 </template>
 
 <script>
-    import { computed, onMounted, reactive } from 'vue'
+    import { computed, onMounted, reactive, watchEffect } from 'vue'
     import { useStore } from 'vuex'
     import axios from 'axios'
   
@@ -38,15 +39,19 @@
         setup() {
 
             const store = useStore()
-            const getCount = computed(() => store.state.currencyList)
-          
+            const currencyItemsStore = computed(() => store.state.currencyList)
+            const currencyFilter = computed(() => store.state.currencyFilter)
+
             const state = reactive({
-                loaded: true
+                loaded: true,
+                currencyItems: []
             })
 
             function changeStore(data) {
 
                 store.commit('updateList', data)
+
+                state.currencyItems = data
             };
 
             onMounted(() => {
@@ -54,17 +59,34 @@
                 axios.get('https://api.coincap.io/v2/assets')
                 .then(response => {  
                     
-                    changeStore(response.data.data)
+                    let arr = response.data.data
+
+                    arr.forEach((e, i) => {
+    
+                        e.priceUsd = parseFloat( e.priceUsd ).toFixed(3)
+                    });
+
+                    changeStore(arr)
                     state.loaded = false
-                    // dodać filtrowanie po store.currencyList
                 })
                 .catch(e => {
                     console.log(e);
                 })
             });
 
+            watchEffect(() => {
+
+                if(currencyFilter.value) {
+
+                    console.log(currencyFilter.value);
+                    console.log();
+                    
+                    state.currencyItems = []
+                }
+            })
+
             return {
-                getCount, changeStore, state
+                changeStore, state
             }
         },
 

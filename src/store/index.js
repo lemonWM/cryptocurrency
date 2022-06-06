@@ -4,13 +4,18 @@ import { createStore } from 'vuex'
 const store = createStore({
     state() {
         return {
-            currencyList: []
+            currencyList: [],
+            currencyFilter: ''
         }
     },
     mutations: {
         updateList(state, payload) {
 
             state.currencyList = payload
+        },
+        updateSearchFilter(state, payload) {
+
+            state.currencyFilter = payload
         }
     }
 })
