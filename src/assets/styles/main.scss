@@ -21,19 +21,20 @@ button {
 
 /* modules */
 
+
+.currency-navigation {
+    padding-top: 100px;
+}
 .currency-list {
-    
+    padding-top: 200px;
+
     .ant-card-grid {
         background: #191f38;
         color: white;
     }
     .ant-card-grid:hover {
         background-color: #1890ff;
-        transform: scale(.98);
-        -webkit-transform: scale(.98);
-        -moz-transform: scale(.98);
-        -ms-transform: scale(.98);
-        -o-transform: scale(.98);
+        box-shadow: none !important;
 
         & a {
             color: white;

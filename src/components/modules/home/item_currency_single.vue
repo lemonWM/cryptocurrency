@@ -1,12 +1,12 @@
 <template>
     <div class="single-currency-wrapper">
-        <div class="single-currency-wrapper__header">
+        <div class="single-currency-wrapper__header container">
             <a-card title="" style="">
                 <p>{{ state.currency.name }} <span>{{ state.currency.symbol }}</span></p>
                 <p><span>Current price: </span>{{ state.currency.priceUsd }} <span>USD</span></p>
             </a-card>
         </div>
-        <div class="single-currency-wrapper__bar">
+        <div class="single-currency-wrapper__bar container">
             <a-radio-group v-model:value="state.period" @change="selectPeriod">
                 <a-radio-button value="y" loading>Years</a-radio-button>
                 <a-radio-button value="d">Days</a-radio-button>
