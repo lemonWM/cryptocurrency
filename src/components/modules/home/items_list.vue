@@ -64,6 +64,7 @@
             const store = useStore()
             const currencyFilter = computed(() => store.state.currencyFilter)
             const resetFilter = computed(() => store.state.resetFilter)
+            const filterBy = computed(() => store.state.filterBy)
 
             const state = reactive({
                 loaded: true,
@@ -86,12 +87,10 @@
                     
                     let arr = response.data.data
 
-                    arr.forEach((e, i) => {
+                    arr.forEach((e) => {
     
                         e.priceUsd = parseFloat( e.priceUsd ).toFixed(3)
                     });
-
-                    console.log(arr);
 
                     changeStore(arr)
                     state.loaded = false
@@ -121,12 +120,48 @@
                     state.filteredItem = {}
                     store.commit('updateResetFilter', false)
                 }
+
+                if(filterBy.value) {
+
+                    if(filterBy.value == 'filter1') {
+
+                        function compare(a, b) {
+                            if (parseInt(a.priceUsd) < parseInt(b.priceUsd)) return 1
+                            if (parseInt(a.priceUsd) > parseInt(b.priceUsd)) return -1
+
+                            return 0
+                        }
+                        
+                        //state.currencyItems.sort(compare)
+                        let arr = []
+                        //arr = state.currencyItems.sort(compare)
+
+                        state.currencyItems = arr
+
+                    } else if(filterBy.value == 'filter2') {
+
+                        console.log('2');
+                    } else if(filterBy.value == 'filter3') {
+
+                        console.log('3');
+                    } else {
+
+                        /*
+                        console.log(computed(() => store.state.currencyList));
+
+                        let arr = computed(() => store.state.currencyList)
+
+                        state.currencyItems = arr
+
+                        console.log(state.currencyItems);
+                        */
+                    }
+                }
             })
 
             return {
                 changeStore, state
             }
         },
-
     }
 </script>

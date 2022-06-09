@@ -6,7 +6,8 @@ const store = createStore({
         return {
             currencyList: [],
             currencyFilter: '',
-            resetFilter: false
+            resetFilter: false,
+            filterBy: ''
         }
     },
     mutations: {
@@ -21,6 +22,10 @@ const store = createStore({
         updateResetFilter(state, payload) {
 
             state.resetFilter = payload
+        },
+        updateFilterBy(state, payload) {
+            
+            state.filterBy = payload
         }
     }
 })
