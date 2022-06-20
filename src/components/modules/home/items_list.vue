@@ -69,15 +69,14 @@
             const state = reactive({
                 loaded: true,
                 currencyItems: [],
+                currencyNonFiltered: [],
                 filtered: false,
                 filteredItem: {}
             })
 
             function changeStore(data) {
-
-                store.commit('updateList', data)
-
                 state.currencyItems = data
+                store.commit('updateList', data)
             };
 
             onMounted(() => {
@@ -131,12 +130,13 @@
 
                             return 0
                         }
-                        
+
+                        state.currencyItems.length = 10
                         //state.currencyItems.sort(compare)
-                        let arr = []
+                        //let arr = []
                         //arr = state.currencyItems.sort(compare)
 
-                        state.currencyItems = arr
+                        //state.currencyItems = arr
 
                     } else if(filterBy.value == 'filter2') {
 

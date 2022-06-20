@@ -1,6 +1,6 @@
 <template>
 	<div class="currency-navigation container">
-        <a-button @click="showAll" type="default" shape="round" :size="size">Show all</a-button>
+    	<a-button @click="showAll" type="default" shape="round" :size="size">Show all</a-button>
 
 		<a-select
 		  v-model:value="state.value"
@@ -23,9 +23,9 @@
         @focus="focus"
         @change="handleFilter"
       >
-				<a-select-option value="filter1">By price</a-select-option>
-				<a-select-option value="filter2">By market cap</a-select-option>
-				<a-select-option value="filter3">Volume in  24hr</a-select-option>
+		<a-select-option value="filter1">By price</a-select-option>
+		<a-select-option value="filter2">By market cap</a-select-option>
+		<a-select-option value="filter3">Volume in  24hr</a-select-option>
       </a-select>
 	</div>
 
